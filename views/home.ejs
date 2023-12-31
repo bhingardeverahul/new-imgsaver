@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- //add jquery cdnjs link -->
+    <!-- <link href="https://cdn.datatables.net/v/bs5/dt-1.13.5/datatables.min.css" rel="stylesheet"/> -->
+    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.5/datatables.min.css" rel="stylesheet"/>
+ 
+</head>
+
+
+<body>
+    <!-- //add jquery cdnjs link -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- //add jquery cdnjs link -->
+    <!-- <script src="https://cdn.datatables.net/v/bs5/dt-1.13.5/datatables.min.js"></script> -->
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.5/datatables.min.js"></script>
+
+   <%-include('partials/navbar');%>
+   <%-include('partials/bg');%>
+   <div class="mx-4">
+    <div class="col-lg-12">
+        <% if(message) {%>
+            <div class="alert  alert-dismissible fade show alert-<%=message.type %>" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong><%=message.message%></strong> 
+            </div>
+            <%} %>
+            
+            <% if(users !=" ") {%>
+
+                <table class="table table-dark my-5 text-center table-striped my-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Action</th>
+                            <th scope="col"></th>
+                        </tr>
+    </thead>
+    <tbody>
+       <% users.forEach((row,Index)=>{%>
+        <tr>
+            <td><%= Index %></td>
+            <td><img src="<%=row.image%>" width="35px" alt="img-thumbnail"></td>
+            <td><%= row.name %></td>
+            <td><%= row.email %></td>
+            <td><%= row.phone %></td>
+            <td><a href="/api/edit/<%=row._id%>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a></td>
+            <td><a href="/api/delete/<%= row._id %>" class="text-danger"><i class="fas fa-trash fa-lg "></i></a></td>
+        </tr>
+        <%})%>
+    </tbody>
+    </table> 
+<%}else {%>
+<h1 class="text-center text-secondary mt-5"> User not Found</h1>
+<%}%>
+<br>
+<!-- <div class="my-3 mx-2 position-absolute">  -->
+    <!-- <% for(j=1,j<=totalpages,j++){%>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="?previous=<%=j %>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span><%= j %>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="?page=<%=j %>"><%=j %>1</a></li>
+                <li class="page-item"><a class="page-link" href="?page=<%=j %>"><%=j %>2</a></li>
+                <li class="page-item"><a class="page-link" href="?page=<%=j %>"><%=j %>3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="?next=<%=j %>"aria-label="Next" >
+                        <span aria-hidden="true">&raquo;</span><%= j %>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <%}%> -->
+        <!-- </div> -->
+    <!-- </div> -->
+    <div>
+
+        <script>
+            $(document).ready(function () {
+            $("table").DataTable({
+                order:[0,"desc"]
+                
+            })
+        })
+        </script>
+</div>
+</div>
+</body>
+</html>
+
+<!-- </div> -->
+<!-- jquery addd -->
